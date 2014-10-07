@@ -23,9 +23,9 @@ class { 'apt_get_update':
 
 # --- SQLite -------------------------------------------------------------------
 
-package { ['sqlite3', 'libsqlite3-dev']:
-  ensure => installed;
-}
+#package { ['sqlite3', 'libsqlite3-dev']:
+#  ensure => installed;
+#}
 
 # --- MySQL --------------------------------------------------------------------
 
@@ -56,7 +56,7 @@ class install_mysql {
     ensure => installed
   }
 }
-class { 'install_mysql': }
+#class { 'install_mysql': }
 
 # --- PostgreSQL ---------------------------------------------------------------
 
@@ -86,7 +86,7 @@ class install_postgres {
     ensure => installed
   }
 }
-class { 'install_postgres': }
+#class { 'install_postgres': }
 
 # --- Memcached ----------------------------------------------------------------
 
@@ -130,7 +130,7 @@ exec { 'install_ruby':
   # The rvm executable is more suitable for automated installs.
   #
   # Thanks to @mpapis for this tip.
-  command => "${as_vagrant} '${home}/.rvm/bin/rvm install 2.0.0 --latest-binary --autolibs=enabled && rvm --fuzzy alias create default 2.0.0'",
+  command => "${as_vagrant} '${home}/.rvm/bin/rvm install 2.1.3 --latest-binary --autolibs=enabled && rvm --fuzzy alias create default 2.1.3'",
   creates => "${home}/.rvm/bin/ruby",
   require => Exec['install_rvm']
 }
@@ -140,7 +140,7 @@ exec { "${as_vagrant} 'gem install bundler --no-rdoc --no-ri'":
   require => Exec['install_ruby']
 }
 
-exec { "${as_vagrant} 'gem install rails --version=3.2.14 --no-rdoc --no-ri'":
+exec { "${as_vagrant} 'gem install rails --version=4.1.6 --no-rdoc --no-ri'":
   creates => "${home}/.rvm/bin/rails",
   require => Exec['install_ruby']
 }
